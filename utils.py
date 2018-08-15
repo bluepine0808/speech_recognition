@@ -5,7 +5,7 @@ from collections import Counter
 
 import numpy as np
 import scipy.io.wavfile as wav
-from python_speech_features import mfcc
+import librosa
 
 from config import Config
 
@@ -258,7 +258,7 @@ def audiofile_to_input_vector(audio_filename, n_input, n_context):
     fs, audio = wav.read(audio_filename)
 
     # 获取mfcc数值
-    orig_inputs = mfcc(audio, samplerate=fs, numcep=n_input)
+    orig_inputs = librosa.feature.mfcc(audio, samplerate=fs, numcep=n_input)
     # print(np.shape(orig_inputs))  #(277, 26)
     orig_inputs = orig_inputs[::2]  # (139, 26) 每隔一行进行一次取样
 
